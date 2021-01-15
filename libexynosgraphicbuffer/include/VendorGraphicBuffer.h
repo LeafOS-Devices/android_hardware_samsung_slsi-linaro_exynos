@@ -78,6 +78,8 @@ public:
 	int size1 = 0;
 	int size2 = 0;
 
+	uint32_t offsets[3];
+
 	union
 	{
 		uint32_t format;
