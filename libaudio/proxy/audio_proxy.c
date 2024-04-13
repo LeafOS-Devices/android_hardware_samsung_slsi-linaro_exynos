@@ -483,7 +483,7 @@ struct mixer {
     unsigned int count;
 };
 
-static struct snd_ctl_event *mixer_read_event(struct mixer *mixer, unsigned int mask)
+static struct snd_ctl_event *mixer_read_event_sec(struct mixer *mixer, unsigned int mask)
 {
     struct snd_ctl_event *ev;
 
@@ -532,7 +532,7 @@ static void *mixer_update_loop(void *context)
     clock_gettime(CLOCK_MONOTONIC, &ts_start);
     do {
         if (aproxy->mixer) {
-            event = mixer_read_event(aproxy->mixer, MIXER_EVENT_ADD);
+            event = mixer_read_event_sec(aproxy->mixer, MIXER_EVENT_ADD);
             if (!event) {
                 clock_gettime(CLOCK_MONOTONIC, &ts_tick);
                 if ((ts_tick.tv_sec - ts_start.tv_sec) > MIXER_UPDATE_TIMEOUT) {
